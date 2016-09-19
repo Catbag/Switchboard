@@ -15,6 +15,14 @@
 */
 package com.keepsafe.switchboard;
 
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,15 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Locale;
-import java.util.UUID;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
-import android.util.Log;
 
 
 /**
@@ -206,6 +205,7 @@ public class SwitchBoard {
 			String country = Locale.getDefault().getISO3Country();			
 			String packageName = c.getPackageName();
 			String versionName = "none";
+			String sdkVersion = String.valueOf(Build.VERSION.SDK_INT);
 			try {
 				versionName = c.getPackageManager().getPackageInfo(c.getPackageName(), 0).versionName;
 			} catch (NameNotFoundException e) {
@@ -220,7 +220,8 @@ public class SwitchBoard {
 				serverUrl = DYNAMIC_CONFIG_SERVER_DEFAULT_URL;
 
 			String params = "uuid="+uuid+"&device="+device+"&lang="+lang+"&country="+country
-					+"&manufacturer="+manufacturer+"&appId="+packageName+"&version="+versionName;
+					+"&manufacturer="+manufacturer+"&appId="+packageName+"&version="+versionName
+					+"&sdkVersion="+sdkVersion;
 			if(DEBUG) Log.d(TAG, "Read from server URL: " + serverUrl + params);
 			String serverConfig = readFromUrlGET(serverUrl, params, mConnectionTimeout, mReadTimeout);
 
