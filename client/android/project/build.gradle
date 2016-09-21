@@ -76,7 +76,7 @@ bintray {
 install {
     repositories.mavenInstaller {
         pom.project {
-            name 'Catbag/Switchboard forked from KeepSafe/Switchboard'
+            name project.name
             description 'A fork from KeepSafe/Switchboard: an project for making A/B Testing'
             url 'https://github.com/Catbag/Switchboard'
             inceptionYear '2012'
