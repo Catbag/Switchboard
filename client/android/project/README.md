@@ -41,9 +41,16 @@ eg.
         }
     }
 
-
 **Don't forget to increment artifact version, or the client project will get the configured version from bintray cloud**
 
     def release_version = '1.0.1'
+    
+**Gradle Tasks**
+
+On Android Studio:
+
+for development, *Gradle Project Tasks -> other -> install*
+
+for publish, *Gradle Project Tasks -> publishing -> bintrayUpload*
 
 
